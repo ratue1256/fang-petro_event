@@ -1,27 +1,6 @@
 local ESX       = exports['es_extended']:getSharedObject()
 local lastEvent = 0
 
--- Commande de test
--- RegisterCommand('petrotest', function(source)
-  --local now = os.time()
- -- if now - lastEvent < Config.Cooldown then
-    --local left = Config.Cooldown - (now - lastEvent)
-   -- if Config.Notify.type == 'chat' then
-    --  TriggerClientEvent('chat:addMessage', source, {
-      --  args = { Config.Notify.prefix, Config.Notify.msgs.cooldown:gsub('{time}', left) }
-    ---  })
-  --  else
-   --   TriggerClientEvent('esx:showNotification', source,
-        --Config.Notify.msgs.cooldown:gsub('{time}', left)
-   ---   )
-  --  end
-  --  return
- -- end
-
-  lastEvent = now
-  TriggerClientEvent('fang_petro_event:start', -1)
-end, true)
-
 -- Réception de la livraison
 RegisterNetEvent('fang_petro_event:delivered')
 AddEventHandler('fang_petro_event:delivered', function()
@@ -45,4 +24,12 @@ AddEventHandler('fang_petro_event:delivered', function()
   end
 
   TriggerClientEvent('fang_petro_event:reward', _src, rewardText)
+end)
+
+CreateThread(function()
+  while true do
+    Wait(Config.AutoStart * 60 * 1000)
+    TriggerClientEvent('fang_petro_event:start', -1)
+    print('[fang_petro_event] Événement lancé automatiquement.')
+  end
 end)
