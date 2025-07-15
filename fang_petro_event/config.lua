@@ -61,5 +61,5 @@ Config.Notify = {
   }
 }
 
--- Cooldown entre chaque event (secondes)
-Config.Cooldown = 1800
+-- Intervalle de lancement automatique (en minutes)
+Config.AutoStart = 30
